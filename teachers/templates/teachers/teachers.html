@@ -1,0 +1,37 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body>
+    {%block content%}
+    <h1 class="logo"><a href="{%url 'home'%}">NOstudent</a></h1>
+    {%endblock%}
+    <section class="login_form">
+        <div class="login_contents">
+            <h2>Nostudent portal</h2>
+            <h1>Teachers Login</h1>
+            <form action="" method="POST">
+                {%if messages%}
+                {% for message in messages%}
+                    {% if message.tags == 'error' %}
+                        <h4 class="error">{{message}}</h4>
+                    {% else%}
+                        <h4 class="success">{{message}}</h4>
+                    {%endif%}
+                {% endfor%}
+                {% endif%}
+                {% csrf_token %}
+                <input type="text" name="username" placeholder="Name">
+                <input type="password" name="password" placeholder="password">
+                <div class="teachers"><button class="login_button">Login</button><p><a href="{% url 'students:student_dashboard'%}">I'm a student</a></p>
+                </div>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
