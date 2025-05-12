@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teachers home</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+</head>
+<body>
+        <div class="all">
+        <section class="menu">
+            <div class="classes">
+            <button class="func_chooser">Mark list</button>
+            <a href=".tables" class="classes_type">12A</a>
+            <a href="" class="classes_type">11A</a>
+            </div>
+            <div class="classes">
+            <button class="func_chooser">Attendance</button>
+            <a href="" class="classes_type">12A</a>
+            <a href="" class="classes_type">11A</a>
+            </div>
+        </section>
+        <section class="tables">
+            <table>
+                <tr><td>12A</td></tr>
+                <tr>
+                    <td>Student name</td>
+                    <td>Student Id</td>
+                    <td>pysics</td>
+                    <td>chemistry</td>
+                    <td>biology</td>
+                    <td>geography</td>
+                    <td>Update</td>
+                </tr>
+                {%for student in students%}
+                {%if student.section == "12A"%}
+                <tr>  
+                <form action="{% url 'teachers:update_grades' student.stud_Id %}" method="POST">
+                    {% csrf_token %}
+                    <td>{{student.F_Name}} {{student.M_Name}}</td>
+                    <td>{{student.stud_Id}}</td>
+                    <td>
+                    <input type="text" name="physics" class="grade_input" value="{{student.physics}}">
+                    </td>
+                    <td>
+                    <input type="text" name="chemistry" class="grade_input" value="{{student.chemistry}}">
+                    </td>
+                    <td>
+                    <input type="text" name="biology" class="grade_input" value="{{student.biology}}">
+                    </td>
+                    <td>
+                    <input type="text" name="geography" class="grade_input" value="{{student.geography}}">
+                    </td>
+                    <td><input type="submit" value="Save" class="save_button"></td>
+                    </tr>
+                    </form>
+                {%endif%}
+                {%endfor%}
+                </table>  
+                
+        </section>
+    </div>
+</body>
+</html>
