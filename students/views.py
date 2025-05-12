@@ -18,11 +18,16 @@ def login_user(request):
         if user is not None:
             login(request, user)
             user_aut = True
-            return redirect('student_dashboard')
+            if hasattr(user, 'student'):
+                return redirect('students:student_home')
+            if hasattr(user, 'teacher'):
+                return redirect('teachers:teachers_dashboard')
         else:
             messages.error(request, '*Invalid username or password')
-            return redirect('login')
+            return redirect('log')
     return render(request, 'login.html')
 
 def student_dashboard(request):
     return render(request, 'students/students.html')
+def students_home(request):
+    return render (request, 'students/student_home.html')

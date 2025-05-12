@@ -14,8 +14,9 @@
     <section class="login_form">
         <div class="login_contents">
             <h2>Nostudent portal</h2>
-            <h1>Students Login</h1>
-            <form action="" method="POST">
+            <h1>Login</h1>
+            <form method="POST">
+                {% csrf_token %}
                 {%if messages%}
                 {% for message in messages%}
                     {% if message.tags == 'error' %}
@@ -25,11 +26,9 @@
                     {%endif%}
                 {% endfor%}
                 {% endif%}
-                {% csrf_token %}
                 <input type="text" name="username" placeholder="Name">
                 <input type="password" name="password" placeholder="password">
-                <div class="teachers"><button class="login_button">Login</button><p><a href="{% url 'teachers:teacher_dashboard'%}">I'm a Teacher</a></p>
-                </div>
+                <input type="submit" value="Login" class="login_button">
             </form>
         </div>
     </section>
