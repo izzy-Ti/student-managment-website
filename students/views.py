@@ -21,10 +21,10 @@ def login_user(request):
             if hasattr(user, 'student'):
                 return redirect('students:student_home')
             if hasattr(user, 'teacher'):
-                return redirect('teachers:teachers_home')
+                return redirect('teachers:teachers_dashboard')
         else:
             messages.error(request, '*Invalid username or password')
-            return redirect('login')
+            return redirect('log')
     return render(request, 'login.html')
 
 def student_dashboard(request):
