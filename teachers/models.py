@@ -1,16 +1,16 @@
 from django.db import models
+from students.models import student
 
-class student(models.Model):
-    F_Name = models.CharField(max_length=50, default='None')
-    M_Name = models.CharField(max_length=50, default='None')
-    stud_Id = models.IntegerField(max_length=15, primary_key=True)
-    Profile = models.ImageField(default='fallback.png', blank=True)
-    section = models.CharField(default='None', max_length=3)
-
-    physics = models.IntegerField(default='0', max_length=3)
-    chemistry = models.IntegerField(default='0', max_length=3)
-    biology = models.IntegerField(default='0', max_length=3)
-    geography = models.IntegerField(default='0', max_length=3)
+class mark(models.Model):
+    student = models.ForeignKey(
+        student, 
+        on_delete=models.CASCADE,
+        related_name='marks'
+    )
+    physics = models.IntegerField(default=0) 
+    chemistry = models.IntegerField(default=0)
+    biology = models.IntegerField(default=0)
+    geography = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.F_Name
+        return f"Mark for {self.student.f_name} (Physics: {self.physics})"

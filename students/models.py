@@ -1,18 +1,11 @@
 from django.db import models
-'''
-class Student(models.Model):
-    F_Name = models.CharField(max_length=50, default='None')
-    M_Name = models.CharField(max_length=50, default='None')
-    Profile = models.ImageField(default='fallback.png', blank=True)
-    date = models.DateField(auto_now_add=True)
+
+class student(models.Model):  # Class names should be PascalCase
+    f_name = models.CharField(max_length=50, default='None', verbose_name="First Name")
+    m_name = models.CharField(max_length=50, default='None', verbose_name="Middle Name")
+    stud_id = models.IntegerField(verbose_name="Student ID", null=True, blank=True)
+    profile = models.ImageField(default='fallback.png', blank=True)
+    section = models.CharField(default='None', max_length=3)
 
     def __str__(self):
-        return self.F_Name
-
-class Physics(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)  
-    marks = models.IntegerField()
-
-    def __str__(self):
-        return f'{self.student.F_Name} - {self.marks}'
-'''
+        return f"{self.f_name} {self.m_name} (ID: {self.stud_id})"  # Fixed string returns
