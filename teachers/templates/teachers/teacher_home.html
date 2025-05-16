@@ -38,7 +38,8 @@
                 <tr>  
                 <form action="{% url 'teachers:update_grades' student.stud_Id %}" method="POST">
                     {% csrf_token %}
-                    <td>{{student.F_Name}}</td>
+                    <td>{{student.F_Name}} {{student.M_Name}}</td>
+                    <td>{{student.stud_Id}}</td>
                     <td>
                     <input type="text" name="physics" class="grade_input" value="{{student.physics}}">
                     </td>
